@@ -11,13 +11,13 @@ import TodoForm from "../components/TodoForm.js";
 const TodoApp = props => {
   const initialTodos = [
     { id: 1, task: "Clean Fishtank", completed: false },
-    { id: 2, task: "Wash Car", completed: false },
+    { id: 2, task: "Wash Car", completed: true },
     { id: 3, task: "Grow Beard", completed: false }
   ];
   const [todos, setTodos] = useState(initialTodos);
-const addTodo = (newTodoText) => {
-setTodos([...todos, {id: 4, task: newTodoText, completed: false}])
-}
+  const addTodo = newTodoText => {
+    setTodos([...todos, { id: 4, task: newTodoText, completed: false }]);
+  };
   return (
     <Paper
       style={{
@@ -33,8 +33,12 @@ setTodos([...todos, {id: 4, task: newTodoText, completed: false}])
           <Typography color="inherit">TODOS WITH HOOKS</Typography>
         </Toolbar>
       </AppBar>
-      <TodoForm addTodo={addTodo}/>
-      <TodoList todos={todos} />
+      <Grid container justify="center" style={{ marginTop: "1rem" }}>
+        <Grid item xs={11} md={8} lg={4}>
+          <TodoForm addTodo={addTodo} />
+          <TodoList todos={todos} />
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
