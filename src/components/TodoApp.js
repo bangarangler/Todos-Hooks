@@ -8,21 +8,18 @@ import Grid from "@material-ui/core/Grid";
 
 import TodoList from "../components/TodoList.js";
 import TodoForm from "../components/TodoForm.js";
+import { TodosProvider } from "../contexts/Todos.Context.js";
 
 const TodoApp = props => {
-  const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
-  const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
-    initialTodos
-  );
   //const initialTodos = [
   //{ id: 1, task: "Clean Fishtank", completed: false },
   //{ id: 2, task: "Wash Car", completed: true },
   //{ id: 3, task: "Grow Beard", completed: false }
   //];
 
-  useEffect(() => {
-    window.localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  //useEffect(() => {
+  //window.localStorage.setItem("todos", JSON.stringify(todos));
+  //}, [todos]);
 
   return (
     <Paper
@@ -41,13 +38,10 @@ const TodoApp = props => {
       </AppBar>
       <Grid container justify="center" style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
-          <TodoForm addTodo={addTodo} />
-          <TodoList
-            todos={todos}
-            removeTodo={removeTodo}
-            toggleTodo={toggleTodo}
-            editTodo={editTodo}
-          />
+          <TodosProvider>
+            <TodoForm />
+            <TodoList />
+          </TodosProvider>
         </Grid>
       </Grid>
     </Paper>
